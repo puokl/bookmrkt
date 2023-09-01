@@ -1,5 +1,5 @@
 # Book_markt: Second-Hand Book Marketplace
-Fourth project at CODAC Berlin. -> temporary demo: https://bookmrkt-client.vercel.app/
+Fourth project at CODAC Berlin. -> temporary demo: https://bookmrkt.vercel.app/
 
 Welcome to the Second-Hand Book Marketplace! This project is a dynamic and user-friendly web application built using the MERN stack with TypeScript. 
 The platform serves as a hub for users to buy and sell second-hand books.
