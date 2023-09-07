@@ -39,8 +39,7 @@ const Register: React.FC = () => {
       dispatch(registerUser(values));
       navigate("/");
     } catch (e: any) {
-      console.log("e", e);
-      console.log("there is an error on the registration");
+      console.log("there is an error on the registration", e);
       setRegisterError(e.response.data);
     }
 
@@ -63,48 +62,55 @@ const Register: React.FC = () => {
   }
   return (
     <>
-      <Box>
-        <Text>Hello from register</Text>
-      </Box>
-      <Flex m={4}>
+      <Flex m={4} minHeight="80vh" alignItems="center" justifyContent="center">
         <Box as="form" onSubmit={handleSubmit(onSubmit)}>
           <FormControl isRequired>
-            <FormLabel>Email</FormLabel>
-            <Input
-              id="email"
-              type="email"
-              placeholder="john.doe@mail.com"
-              {...register("email")}
-            />
-            <Text as="p">{errors.email?.message?.toString()}</Text>
-            <FormLabel>Name</FormLabel>
-            <Input
-              id="name"
-              type="text"
-              placeholder="John Doe"
-              {...register("name")}
-            />
-            <Text as="p">{errors.name?.message?.toString()}</Text>
-            <FormLabel>Password</FormLabel>
-            <Input
-              id="password"
-              type="password"
-              placeholder="********"
-              {...register("password")}
-            />
-            <Text as="p">{errors.password?.message?.toString()}</Text>
-            <FormLabel>Confirm Password</FormLabel>
-            <Input
-              id="password"
-              type="password"
-              placeholder="********"
-              {...register("passwordConfirmation")}
-            />
-            <Text as="p">
-              {errors.passwordConfirmation?.message?.toString()}
-            </Text>
+            <Box mb={3}>
+              <FormLabel>Email</FormLabel>
+              <Input
+                id="email"
+                type="email"
+                placeholder="john.doe@mail.com"
+                {...register("email")}
+              />
+              <Text as="p">{errors.email?.message?.toString()}</Text>
+            </Box>
+            <Box mb={3}>
+              <FormLabel>Name</FormLabel>
+              <Input
+                id="name"
+                type="text"
+                placeholder="John Doe"
+                {...register("name")}
+              />
+              <Text as="p">{errors.name?.message?.toString()}</Text>
+            </Box>
+            <Box mb={3}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                id="password"
+                type="password"
+                placeholder="********"
+                {...register("password")}
+              />
+              <Text as="p">{errors.password?.message?.toString()}</Text>
+            </Box>
+            <Box mb={3}>
+              <FormLabel>Confirm Password</FormLabel>
+              <Input
+                id="password"
+                type="password"
+                placeholder="********"
+                {...register("passwordConfirmation")}
+              />
+              <Text as="p">
+                {errors.passwordConfirmation?.message?.toString()}
+              </Text>
+            </Box>
             <Text as="p">{registerError}</Text>
-            <Button type="submit">SUBMIT</Button>
+            <Flex alignItems="center" justifyContent="center" mt={6}>
+              <Button type="submit">SUBMIT</Button>
+            </Flex>
           </FormControl>
         </Box>
       </Flex>

@@ -51,41 +51,42 @@ const Login: React.FC = () => {
     return <Spinner />;
   }
   return (
-    <Box>
-      <Flex
-        maxWidth="400px"
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        m={4}
-      >
-        <Text as="p">{loginError}</Text>
-
-        <FormControl as="form" isRequired onSubmit={handleSubmit(handleLogin)}>
-          <FormLabel>Email</FormLabel>
-          <Input
-            id="email"
-            type="email"
-            placeholder="john.doe@mail.com"
-            {...register("email")}
-          />
-          <Text as="p">{errors.email?.message?.toString()}</Text>
-          <FormLabel>Password</FormLabel>
-          <Input
-            id="password"
-            type="password"
-            placeholder="********"
-            {...register("password")}
-          />
-          <Text as="p">{errors.password?.message?.toString()}</Text>
-          <Button type="submit">SUBMIT</Button>
-          <Text as="p">Or login with Google</Text>
+    <>
+      <Flex m={4} minHeight="80vh" alignItems="center" justifyContent="center">
+        <Box as="form" onSubmit={handleSubmit(handleLogin)} maxW="250px">
+          <FormControl isRequired>
+            <Box mb={3}>
+              <FormLabel>Email</FormLabel>
+              <Input
+                id="email"
+                type="email"
+                placeholder="john.doe@mail.com"
+                {...register("email")}
+              />
+              <Text as="p">{errors.email?.message?.toString()}</Text>
+            </Box>
+            <Box mb={3}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                id="password"
+                type="password"
+                placeholder="********"
+                {...register("password")}
+              />
+              <Text as="p">{errors.password?.message?.toString()}</Text>
+            </Box>
+            <Text as="p">{loginError}</Text>
+            <Flex alignItems="center" justifyContent="center" mt={6}>
+              <Button type="submit">SUBMIT</Button>
+            </Flex>
+            {/* <Text as="p">Or login with Google</Text>
           <Button as="a" href={googleUr}>
-            Google Login
-          </Button>
-        </FormControl>
+          Google Login
+        </Button> */}
+          </FormControl>
+        </Box>
       </Flex>
-    </Box>
+    </>
   );
 };
 export default Login;
