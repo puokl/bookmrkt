@@ -12,10 +12,7 @@ export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
 
 export function verifyJwt(token: string) {
   try {
-    console.log("token inside verifyJwt", token);
-    console.log("privateKey inside verifyJwt", privateKey);
     const decoded = jwt.verify(token, privateKey);
-    console.log("decoded inside verifyJwt", decoded);
 
     return {
       valid: true,
@@ -26,7 +23,6 @@ export function verifyJwt(token: string) {
     console.log("error inside verifyJwt", e);
     return {
       valid: false,
-      // expired: e.message === "jwt expired",
       expired: true,
       decoded: null,
     };

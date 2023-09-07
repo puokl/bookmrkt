@@ -24,8 +24,3 @@ function fileFilter(
 const multerUpload = multer({ storage, fileFilter });
 
 export default multerUpload;
-
-// const multerSingleUpload = multer({ storage, fileFilter }).single("file");
-// const multerMultipleUpload = multer({ storage, fileFilter }).array("files");
-
-// export { multerSingleUpload, multerMultipleUpload };

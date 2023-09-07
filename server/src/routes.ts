@@ -38,7 +38,6 @@ import {
 import { uploadImageHandler } from "./controller/image.controller";
 import multerUpload from "./middleware/multerMiddleware";
 import { searchProductHandler } from "./controller/search.controller";
-import { createCharacter, getCharacter } from "./controller/test.controller";
 
 function routes(app: Express) {
   // app.options("*", (req, res) => {
@@ -194,11 +193,6 @@ function routes(app: Express) {
   app.get("/api/chat/sent", requireUser, getAllUserSentChatHandler);
   app.post("/api/chat/:chatId", requireUser, addConversationHandler);
   app.get("/api/search", searchProductHandler);
-
-  //SECTION -
-
-  app.post("/api/character", createCharacter);
-  app.get("/api/character", getCharacter);
 }
 
 export default routes;

@@ -79,21 +79,16 @@ export async function addConversationHandler(
 
     const conversation = req.body;
 
-    // Find the chat document by ID
     const chat = await findConversation(chatId);
 
     if (!chat) {
       return res.status(404).json({ error: "Chat not found" });
     }
 
-    // Add the new conversation to the conversation array
     chat.conversation.push(conversation);
-
-    // Save the updated chat document
 
     const updatedChat = await chat.save();
 
-    // res.status(200).json({ chat: updatedChat });
     res.status(200).send(updatedChat);
   } catch (error: any) {
     res.status(500).json({ error: error });

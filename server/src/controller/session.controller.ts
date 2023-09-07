@@ -36,20 +36,14 @@ const deleteCookies: CookieOptions = {
 // @route   POST /api/sessions
 // @access  Private
 export async function createUserSessionHandler(req: Request, res: Response) {
-  console.log("inside createUserSessionHandler");
-  console.log("Request Headers:", req.headers);
-
   // 1. validate the user's password
   const user = await validatePassword(req.body);
-  console.log("user in create user session handler", user);
   if (!user) {
     console.log("no user in create session handler");
     return res.status(401).send("Invalid email or password");
   }
-  console.log("after validatePassword(req.body) in createUserSessionHandler");
   // 2. create a session
   const session = await createSession(user._id, req.get("user-agent") || "");
-  console.log("session created");
   // 3. create an access token
   const accessToken = signJwt(
     {
@@ -67,22 +61,13 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     { expiresIn: process.env.REFRESHTOKENTTL } // 1y
   );
 
-  console.log("Request Headers22:", req.headers);
-
   // Set CORS headers to allow requests from the frontend
   res.header("Access-Control-Allow-Origin", process.env.ORIGIN);
-  // res.header("Access-Control-Allow-Origin", "https://marktbook.vercel.app");
   res.header("Access-Control-Allow-Credentials", "true"); // Allow credentials
 
   // 5. return access & refresh tokens
   res.cookie("accessToken", accessToken, accessTokenCookieOptions);
-
   res.cookie("refreshToken", refreshToken, refreshTokenCookieOptions);
-  console.log("Request Headers33:", req.headers);
-
-  console.log("accessToken", accessToken);
-  console.log("refreshToken", refreshToken);
-  console.log("user", user);
 
   return res.send({ user });
 }
@@ -104,7 +89,7 @@ export async function getUserSessionHandler(req: Request, res: Response) {
 export async function deleteSessionHandler(req: Request, res: Response) {
   const sessionId = res.locals.user.session;
 
-  //ANCHOR - since user somehow can have multiple session, i loop through all the user'session and delete them all,
+  //ANCHOR - since user somehow can have multiple session (to fix), i loop through all the user'session and delete them all,
   //get array of sessions
   const userId = res.locals.user._id;
   const sessions = await findSessions({ user: userId, valid: true });

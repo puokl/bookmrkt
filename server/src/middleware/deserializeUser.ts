@@ -9,8 +9,6 @@ const deserializeUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("req.headers inside deserializeUser", req.headers);
-  console.log("req.cookies inside deserializeUser", req.cookies);
   const accessToken =
     get(req, "cookies.accessToken") ||
     get(req, "headers.authorization", "").replace(/^Bearer\s/, ""); // replace bearer with an empty string
@@ -18,11 +16,7 @@ const deserializeUser = async (
   const refreshToken =
     get(req, "cookies.refreshToken") || get(req, "headers.x-refresh");
 
-  console.log("accessToken inside deserializeUser", accessToken);
-  console.log("refreshToken inside deserializeUser", refreshToken);
   const { decoded } = verifyJwt(accessToken);
-
-  console.log("decoded inside deserializeUser", decoded);
 
   if (decoded) {
     res.locals.user = decoded;
@@ -50,7 +44,6 @@ const deserializeUser = async (
     // if they send a request with an expired access token the req flow is just going to continue as if they sent the req with a
     // valid access token given that the refresh token was valid
 
-    console.log("new accesstoken created");
     return next();
   }
   if (!refreshToken) {
